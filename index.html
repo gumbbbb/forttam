@@ -30,22 +30,22 @@
   <img src="tam.png" alt="For You">
 
   <!-- Nhạc nền, tạm muted để bypass chặn -->
-  <audio id="bgMusic" autoplay loop muted>
-    <source src="music.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ audio.
-  </audio>
+<audio id="bgMusic" autoplay muted loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', function () {
-      const audio = document.getElementById("bgMusic");
+<script>
+  window.addEventListener('load', () => {
+    const audio = document.getElementById("bgMusic");
 
-      // Bỏ muted sau khi trang tải xong để kích hoạt âm thanh
+    // Gỡ muted sau 300ms
+    setTimeout(() => {
       audio.muted = false;
-      audio.play().catch(err => {
-        console.warn("Trình duyệt chặn autoplay. Nhạc sẽ phát sau khi bạn tương tác.");
+      audio.play().then(() => {
+        console.log("✅ Autoplay thành công");
+      }).catch(err => {
+        console.warn("❌ Autoplay vẫn bị chặn:", err);
       });
-    });
-  </script>
-
-</body>
-</html>
+    }, 300);
+  });
+</script>
