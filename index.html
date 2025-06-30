@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #d2d2e7; /* Thay đổi mã màu nền tại đây */
+      background-color: #d2d2e7;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,17 +21,31 @@
       object-fit: contain;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-
   <img src="tam.png" alt="For You">
-    <!-- Nhạc nền -->
-  <audio autoplay loop hidden>
+
+  <!-- Nhạc nền, tạm muted để bypass chặn -->
+  <audio id="bgMusic" autoplay loop muted>
     <source src="music.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ audio.
   </audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const audio = document.getElementById("bgMusic");
+
+      // Bỏ muted sau khi trang tải xong để kích hoạt âm thanh
+      audio.muted = false;
+      audio.play().catch(err => {
+        console.warn("Trình duyệt chặn autoplay. Nhạc sẽ phát sau khi bạn tương tác.");
+      });
+    });
+  </script>
 
 </body>
 </html>
